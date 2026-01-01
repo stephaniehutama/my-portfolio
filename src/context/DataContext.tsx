@@ -1,0 +1,175 @@
+import React, { createContext, useContext, useState, ReactNode } from 'react';
+import { PortfolioData, Project, Experience } from '../types';
+
+const defaultData: PortfolioData = {
+  about: {
+    name: "Steph",
+    title: "Frontend Engineer",
+    bio: "Crafting beautiful, intuitive interfaces with Vue.js and React. Passionate about real-time systems, mapping technologies, and building products that make a difference.",
+    email: "stephaniehutama@gmail.com",
+    github: "stephaniehutama",
+    linkedin: "stephanie-hutama"
+  },
+  projects: [
+    {
+      id: "1",
+      title: "Control Tower Dashboard",
+      description: "Real-time fleet management dashboard for monitoring vehicles and driver activities. Led multiple enhancements including WebSocket connectivity fixes, multi-IMEI query optimization for faster data loading, CT card component revamp, notification system integration, and vehicle grouping logic improvements for better fleet organization.",
+      image: "/images/control-tower.png",
+      tags: ["Vue.js", "WebSocket", "GraphQL", "Vuex", "SCSS"],
+      category: "work",
+      featured: true,
+      client: "MCEasy"
+    },
+    {
+      id: "2", 
+      title: "Alert Center System",
+      description: "Centralized notification hub for fleet alerts featuring real-time WebSocket updates, smart filtering, and intuitive accordion UI. Includes alert detail pages with Google Maps integration displaying vehicle locations and route polylines. Developed and maintained across two codebases — Vue 2 with JavaScript (legacy) and Vue 3 Nuxt with TypeScript (modern) — ensuring feature parity between both systems.",
+      image: "/images/alert-center.png",
+      tags: ["Vue.js", "Nuxt", "TypeScript", "WebSocket", "Google Maps API", "SCSS"],
+      category: "work",
+      featured: true,
+      client: "MCEasy"
+    },
+    {
+      id: "3",
+      title: "Orthophoto Map Overlay",
+      description: "High-performance mapping feature displaying aerial orthophoto imagery with dynamic tile loading and service worker caching. Enables users to toggle satellite overlays on fleet tracking maps for enhanced spatial awareness and route planning.",
+      image: "/images/orthophoto.png",
+      tags: ["Vue.js", "Google Maps API", "Service Worker", "TypeScript"],
+      category: "work",
+      featured: true,
+      client: "MCEasy"
+    },
+    {
+      id: "4",
+      title: "Fleet Operations Suite",
+      description: "End-to-end development of core fleet management modules enhancing operational efficiency. Delivered Maintenance Management for vehicle servicing workflows, Scheduler for automated task coordination, and Shift Management for streamlined driver allocation. Implemented complex form handling, data validation, and scalable component architecture.",
+      image: "/images/fleet-management.png",
+      tags: ["Vue.js", "TypeScript", "Vuex", "REST API", "SCSS"],
+      category: "work",
+      featured: true,
+      client: "MCEasy"
+    },
+    {
+      id: "5",
+      title: "Portfolio Website",
+      description: "Personal portfolio built with React, TypeScript, and Vite. Features dark/light theme toggle, responsive design, and a secret CMS for content management.",
+      image: "",
+      tags: ["React", "TypeScript", "Vite", "CSS Modules"],
+      category: "personal",
+      featured: false
+    }
+  ],
+  experiences: [
+    {
+      id: "1",
+      role: "Frontend Engineer",
+      company: "MCEasy",
+      period: "2023 — Present",
+      description: "Building and maintaining Vue.js applications for a fleet management platform serving enterprise clients. Responsible for real-time monitoring systems, mapping integrations, and notification infrastructure.",
+      highlights: ["Vue.js", "Nuxt", "WebSocket", "GraphQL", "Google Maps API", "TypeScript", "Vuex", "Pinia"]
+    },
+    {
+      id: "2",
+      role: "Marketing Agent",
+      company: "Vista Property",
+      period: "May 2018 — 2023",
+      description: "Freelance property agent specializing in apartment and house rentals and sales. Built client relationships, conducted property viewings, and negotiated deals for residential properties.",
+      highlights: ["Sales", "Negotiation", "Client Relations", "Property Marketing", "Freelance"]
+    }
+  ],
+  skills: [
+    { id: "1", name: "Vue.js", icon: "🌿", category: "Frontend" },
+    { id: "2", name: "React", icon: "⚛️", category: "Frontend" },
+    { id: "3", name: "TypeScript", icon: "💙", category: "Language" },
+    { id: "4", name: "GraphQL", icon: "💜", category: "Backend" },
+    { id: "5", name: "WebSocket", icon: "⚡", category: "Real-time" },
+    { id: "6", name: "Google Maps", icon: "🗺️", category: "Mapping" },
+    { id: "7", name: "Nuxt", icon: "💚", category: "Frontend" }
+  ]
+};
+
+interface DataContextType {
+  data: PortfolioData;
+  updateAbout: (about: PortfolioData['about']) => void;
+  addProject: (project: Project) => void;
+  updateProject: (project: Project) => void;
+  deleteProject: (id: string) => void;
+  addExperience: (exp: Experience) => void;
+  updateExperience: (exp: Experience) => void;
+  deleteExperience: (id: string) => void;
+}
+
+const DataContext = createContext<DataContextType | undefined>(undefined);
+
+export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [data, setData] = useState<PortfolioData>(defaultData);
+
+  const updateAbout = (about: PortfolioData['about']) => {
+    setData(prev => ({ ...prev, about }));
+  };
+
+  const addProject = (project: Project) => {
+    setData(prev => ({
+      ...prev,
+      projects: [...prev.projects, { ...project, id: Date.now().toString() }]
+    }));
+  };
+
+  const updateProject = (project: Project) => {
+    setData(prev => ({
+      ...prev,
+      projects: prev.projects.map(p => p.id === project.id ? project : p)
+    }));
+  };
+
+  const deleteProject = (id: string) => {
+    setData(prev => ({
+      ...prev,
+      projects: prev.projects.filter(p => p.id !== id)
+    }));
+  };
+
+  const addExperience = (exp: Experience) => {
+    setData(prev => ({
+      ...prev,
+      experiences: [...prev.experiences, { ...exp, id: Date.now().toString() }]
+    }));
+  };
+
+  const updateExperience = (exp: Experience) => {
+    setData(prev => ({
+      ...prev,
+      experiences: prev.experiences.map(e => e.id === exp.id ? exp : e)
+    }));
+  };
+
+  const deleteExperience = (id: string) => {
+    setData(prev => ({
+      ...prev,
+      experiences: prev.experiences.filter(e => e.id !== id)
+    }));
+  };
+
+  return (
+    <DataContext.Provider value={{
+      data,
+      updateAbout,
+      addProject,
+      updateProject,
+      deleteProject,
+      addExperience,
+      updateExperience,
+      deleteExperience
+    }}>
+      {children}
+    </DataContext.Provider>
+  );
+};
+
+export const useData = () => {
+  const context = useContext(DataContext);
+  if (!context) throw new Error('useData must be used within DataProvider');
+  return context;
+};
