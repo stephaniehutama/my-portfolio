@@ -159,7 +159,7 @@ const DataContext = createContext<DataContextType | undefined>(undefined)
 export const DataProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [data, setData] = useState<PortfolioData>(defaultData)
+  const [data] = useState<PortfolioData>(defaultData)
 
   return (
     <DataContext.Provider
