@@ -1,52 +1,60 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, Sparkles } from 'lucide-react';
-import ThemeToggle from './ThemeToggle';
-import styles from './Navbar.module.css';
+import React, { useState, useEffect } from "react"
+import { Menu, X, Sparkles } from "lucide-react"
+import ThemeToggle from "./ThemeToggle"
+import styles from "./Navbar.module.css"
 
 const Navbar: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    const handleScroll = () => setScrolled(window.scrollY > 20)
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   const navLinks = [
-    { path: '#', label: 'Home' },
-    { path: '#projects', label: 'Projects' },
-    { path: '#experience', label: 'Experience' },
-    { path: '#contact', label: 'Contact' },
-  ];
+    { path: "#", label: "Home" },
+    { path: "#projects", label: "Projects" },
+    { path: "#experience", label: "Experience" },
+    { path: "#skills", label: "Skills" },
+    { path: "#contact", label: "Contact" },
+  ]
 
   const handleNavClick = (path: string) => {
-    setIsOpen(false);
-    if (path === '#') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    setIsOpen(false)
+    if (path === "#") {
+      window.scrollTo({ top: 0, behavior: "smooth" })
     } else {
-      const id = path.replace('#', '');
-      const element = document.getElementById(id);
-      element?.scrollIntoView({ behavior: 'smooth' });
+      const id = path.replace("#", "")
+      const element = document.getElementById(id)
+      element?.scrollIntoView({ behavior: "smooth" })
     }
-  };
+  }
 
   return (
-    <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
+    <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ""}`}>
       <div className={styles.container}>
-        <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('#'); }} className={styles.logo}>
+        <a
+          href="#"
+          onClick={(e) => {
+            e.preventDefault()
+            handleNavClick("#")
+          }}
+          className={styles.logo}
+        >
           <Sparkles size={18} />
           <span>steph</span>
         </a>
 
-        <ul className={`${styles.links} ${isOpen ? styles.open : ''}`}>
+        <ul className={`${styles.links} ${isOpen ? styles.open : ""}`}>
           {navLinks.map(({ path, label }) => (
             <li key={path}>
               <a
                 href={path}
                 onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick(path);
+                  e.preventDefault()
+                  handleNavClick(path)
                 }}
               >
                 {label}
@@ -57,7 +65,7 @@ const Navbar: React.FC = () => {
 
         <div className={styles.actions}>
           <ThemeToggle />
-          <button 
+          <button
             className={styles.menuBtn}
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
@@ -67,7 +75,7 @@ const Navbar: React.FC = () => {
         </div>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar
