@@ -13,7 +13,6 @@ import {
   SiChartdotjs,
   SiGit,
   SiDocker,
-  SiPinia,
 } from "react-icons/si"
 import { TbRoute, TbBrandSocketIo, TbDatabase } from "react-icons/tb"
 import { useData } from "../context/DataContext"
