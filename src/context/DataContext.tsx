@@ -137,15 +137,10 @@ const defaultData: PortfolioData = {
       { name: "Docker", category: "Tools" },
     ],
     languages: [
-      { name: "English", level: "Fluent", flag: "🇺🇸", percentage: 95 },
-      {
-        name: "Bahasa Indonesia",
-        level: "Native",
-        flag: "🇮🇩",
-        percentage: 100,
-      },
-      { name: "Mandarin", level: "Intermediate", flag: "🇨🇳", percentage: 50 },
-      { name: "German", level: "A1 - Learning", flag: "🇩🇪", percentage: 20 },
+      { name: "English", level: "Fluent", flag: "US", percentage: 95 },
+      { name: "Bahasa Indonesia", level: "Native", flag: "ID", percentage: 100 },
+      { name: "Mandarin", level: "Intermediate", flag: "CN", percentage: 50 },
+      { name: "German", level: "A1 - Learning", flag: "DE", percentage: 20 },
     ],
   },
 }
