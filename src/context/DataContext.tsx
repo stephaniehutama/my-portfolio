@@ -137,7 +137,7 @@ const defaultData: PortfolioData = {
       { name: "Docker", category: "Tools" },
     ],
     languages: [
-      { name: "English", level: "Fluent", flag: "🇬🇧", percentage: 95 },
+      { name: "English", level: "Fluent", flag: "🇺🇸", percentage: 95 },
       {
         name: "Bahasa Indonesia",
         level: "Native",
