@@ -17,6 +17,7 @@ import {
 import { TbRoute, TbBrandSocketIo, TbDatabase } from "react-icons/tb"
 import { useData } from "../context/DataContext"
 import styles from "./Skills.module.css"
+import Flag from "react-world-flags"
 
 // Icon mapping
 const iconMap: Record<string, React.ReactNode> = {
@@ -127,7 +128,7 @@ const Skills: React.FC = () => {
               style={{ animationDelay: `${index * 0.15}s` }}
             >
               <div className={styles.langHeader}>
-                <span className={styles.flag}>{lang.flag}</span>
+                <Flag code={lang.flag} className={styles.flag} style={{ width: 24, height: 18 }} />
                 <div>
                   <h4 className={styles.langName}>{lang.name}</h4>
                   <span className={styles.level}>{lang.level}</span>
