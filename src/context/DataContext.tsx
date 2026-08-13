@@ -138,9 +138,14 @@ const defaultData: PortfolioData = {
     ],
     languages: [
       { name: "English", level: "Fluent", flag: "US", percentage: 95 },
-      { name: "Bahasa Indonesia", level: "Native", flag: "ID", percentage: 100 },
+      {
+        name: "Bahasa Indonesia",
+        level: "Native",
+        flag: "ID",
+        percentage: 100,
+      },
       { name: "Mandarin", level: "Intermediate", flag: "CN", percentage: 50 },
-      { name: "German", level: "A1 - Learning", flag: "DE", percentage: 20 },
+      { name: "German", level: "A2 - Learning", flag: "DE", percentage: 35 },
     ],
   },
 }
